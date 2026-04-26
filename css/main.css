@@ -419,9 +419,9 @@ details[open] > div { opacity: 0; animation-name: slideDown; animation-duration:
 
 #random-button:hover { cursor: pointer; }
 
-div.search { background-color: var(--color-bg); width: 100%; position: relative; border-bottom: 1px solid var(--color-hairline); line-height: 1; }
+div.search { background-color: var(--color-bg); width: 100%; height: 36px; position: relative; border-bottom: 1px solid var(--color-hairline); line-height: 36px; }
 
-.searchInput { box-sizing: border-box; background-color: transparent; width: 100%; height: 100%; top: 0; position: relative; padding: 0 0 0 var(--sp-2); border: 0; margin: 0; font-family: var(--font-body); font-size: 13px; color: var(--color-page-ink); -webkit-appearance: textfield; border-radius: 0; }
+.searchInput { box-sizing: border-box; background-color: transparent; width: 100%; height: 100%; top: 0; position: relative; padding: 0 0 0 var(--sp-3); border: 0; margin: 0; font-family: var(--font-body); font-size: 0.88rem; color: var(--color-page-ink); -webkit-appearance: textfield; border-radius: 0; }
 
 .searchButton { border: 0; border-radius: 0; background-color: transparent; position: absolute; top: 0; right: 0; height: 100%; z-index: 2; cursor: pointer; }
 
