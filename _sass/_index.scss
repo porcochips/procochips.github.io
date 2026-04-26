@@ -1,26 +1,93 @@
+// ── ASCII hero container
+.ascii-hero {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  background: var(--color-bg);
+  overflow: hidden;
+  border-bottom: 2px solid var(--color-ink);
+}
+
+// ── Homepage contact links
 .blog-face {
-    text-align: center;
-}
+  text-align: center;
+  padding: var(--sp-4) 0 var(--sp-3);
+  border-bottom: 1px solid var(--color-hairline);
 
-.indent {
-    margin-left: 30px;
-}
+  .contact {
+    margin-top: var(--sp-3);
 
-.contact {
-    margin-top: 10px;
-    text-align: center;
     a {
-        background: $theme-color;
-        color: #FFFFFF;
-        padding: 5px 10px;
-        text-decoration: none;
-        border-radius: 8px;
-        white-space: nowrap;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: none;
+      color: var(--color-page-ink);
+      padding: var(--sp-1) var(--sp-3);
+      text-decoration: none;
+      border-radius: 0;
+      border: 2px solid var(--color-ink);
+      white-space: nowrap;
+      display: inline-block;
+      margin: 2px;
+      transition: background 0.15s, color 0.15s;
 
-        &:hover {
-            transition: background 0.3s ease;
-            background: #666;
-        }
+      &:hover {
+        background: var(--color-ink);
+        color: var(--color-bg);
+      }
     }
+  }
 }
 
+// ── Section ribbons (WIRED black bar headers)
+.indent {
+  margin: 0;
+  padding: var(--sp-2) var(--sp-4);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  background: var(--color-ribbon-bg);
+  color: var(--color-ribbon-fg);
+  border-radius: 0;
+  display: block;
+}
+
+// ── Post list
+.post-list {
+  list-style: none;
+  margin: 0;
+  padding: 0 var(--sp-4);
+}
+
+.post-list li {
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.post-list li:last-child {
+  border-bottom: none;
+}
+
+// ── "전체 리스트 보기" link
+h4 {
+  margin: 0;
+  padding: var(--sp-2) var(--sp-4);
+  border-top: 2px solid var(--color-ink);
+  border-bottom: 1px solid var(--color-hairline);
+
+  a {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: var(--color-page-ink);
+
+    &:hover { color: var(--color-accent); }
+  }
+}

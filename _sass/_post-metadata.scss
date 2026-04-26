@@ -1,34 +1,54 @@
-/* 글 본문 상단의 메타데이터 */
+// ── Post header metadata
 
 .post-header {
-    h2 {
-        border: 0px;
-    }
-    p {
-        margin: 0;
-    }
-    // 글의 제목
-    .page-title a {
-        text-decoration: none;
-    }
-}
+  padding: var(--sp-4);
+  border-bottom: 1px solid var(--color-hairline);
 
-// 글의 해시태그
-.post-tag a {
-    color: #888888;
+  h2 { border: 0; }
+
+  p { margin: 0; }
+
+  .page-title a {
     text-decoration: none;
+    color: var(--color-page-ink);
+    &:hover { color: var(--color-accent); }
+  }
 }
 
-// 글 이력 버튼 (created, updated)
-.history-button {
-    text-align: right;
-    font-size: 0.8em;
-}
-
-// 글의 부제목
+// ── Title summary (subtitle)
 .title-summary {
-    font-size: 1.6em;
-    font-style: italic;
-    color: gray;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-style: normal;
+  color: var(--color-caption);
+  margin-top: var(--sp-1);
 }
 
+// ── Tags (mono uppercase)
+.post-tag a {
+  font-family: var(--font-mono);
+  font-size: 0.70rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.9px;
+  color: var(--color-caption);
+  text-decoration: none;
+
+  &:hover { color: var(--color-accent); }
+}
+
+// ── History buttons (blame, edit)
+.history-button {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 0.70rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--color-caption);
+
+  a {
+    color: var(--color-caption);
+    text-decoration: none;
+    &:hover { color: var(--color-accent); }
+  }
+}

@@ -1,232 +1,279 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,500,600,700,800,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300;400&display=swap');
-
 body {
-    margin: 0;
-    height: 100%;
-}
-
-body {
-  font: 400 16px 'Roboto Slab',AppleSDGothicNeo,sans-serif;
-  color: rgba(0, 0, 0, 0.84);
-  -webkit-text-size-adjust: 100%;
-  -webkit-font-feature-settings: "kern" 1;
-  -moz-font-feature-settings: "kern" 1;
-  -o-font-feature-settings: "kern" 1;
-  font-feature-settings: "kern" 1;
-  font-kerning: normal;
-  display: flex;
+  margin: 0;
   min-height: 100vh;
+  display: flex;
   flex-direction: column;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-page-ink);
+  background-color: var(--color-bg);
+  -webkit-text-size-adjust: 100%;
+  font-kerning: normal;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 body, th, td, div, p, li {
-    word-break: keep-all;
+  word-break: keep-all;
 }
 
-$main-font-color: #4D5667;
-
-p, li {
-    color: $main-font-color;
+// ── Links
+a {
+  color: var(--color-page-ink);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.12s;
 }
-
-a:link {
+a:hover {
+  color: var(--color-accent);
 }
 a:visited {
-    color: #344B83;
+  color: var(--color-page-ink);
+}
+
+// ── Headings — SUIT, tight tracking on large
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-body);
+  color: var(--color-page-ink);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.3px;
+  margin-top: var(--sp-6);
+  margin-bottom: var(--sp-3);
+}
+
+h1 { font-size: 2.2rem;  letter-spacing: -0.5px; margin: 0; }
+h2 { font-size: 1.6rem;  border-bottom: 1px solid var(--color-hairline); padding-bottom: var(--sp-1); }
+h3 { font-size: 1.3rem; }
+h4 { font-size: 1.1rem; }
+h5 { font-size: 1.0rem; }
+h6 { font-size: 0.9rem; font-weight: 600; }
+
+.post-content h1 { border-bottom: 2px solid var(--color-ink); }
+.post-content h2 { &:before { color: var(--color-caption); } }
+.post-content h3 { font-style: normal; }
+.post-content h4 { font-style: normal; padding-left: 0; }
+.post-content h5 { font-style: normal; padding-left: 0; }
+
+// ── Body text
+p, li {
+  color: var(--color-page-ink);
+  line-height: 1.75;
 }
 
 .post-content {
-    line-height: 2;
+  line-height: 1.75;
 }
 
+// ── Blockquote
 blockquote {
-    font-family: 'Noto Serif KR', serif;
-    background: #FFFFFF;
-    margin:0;
-    padding: 1px 0px 1px 8px;
-    border-left: 4px solid #CCCCCC;
-    p {
-        line-height: 2;
-        color: $second-font-color;
-    }
-}
-.hide {
-    display: none;
-}
-.center {
-    text-align: center;
-}
-.language-html table {
-    background: transparent;
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  margin: var(--sp-4) 0;
+  padding: var(--sp-3) var(--sp-4);
+  border-left: 3px solid var(--color-ink);
+  border-radius: 0;
+
+  p {
+    line-height: 1.75;
+    color: var(--color-caption);
     margin: 0;
-}
-.language-html td {
-    padding: 0;
-    border: 0;
-
+  }
 }
 
-h1 {
-    font-weight: normal;
-}
-h2,h3,h4,h5,h6 {
-    font-weight: normal;
-    color: $main-font-color;
-}
-
-.post-content h1,h2,h3,h4,h5,h6 {
-    &:before { color:$theme-color; }
-}
-
-h1 {
-    font-size: 2.2rem;
-    margin: 0px;
-}
-.post-content h1 {
-    border-bottom: 1px solid $theme-color;
-}
-h2 {
-    font-size: 1.8em;
-    border-bottom: 1px solid #d0d0d0;
-}
-.post-content h2 {
-    &:before { content:"⠁"; }
-}
-h3 {
-    font-size: 1.6em;
-    font-style: italic;
-}
-.post-content h3 {
-    &:before { content:"⠃"; }
-}
-h4 {
-    font-size: 1.4em;
-    padding-left: 5px;
-    font-style: italic;
-}
-.post-content h4 {
-    &:before { content:"⠋"; }
-}
-h5 {
-    font-size: 1.2em;
-    padding-left: 10px;
-    font-style: italic;
-}
-.post-content h5 {
-    &:before { content:"⠛"; }
-}
-h6 {
-    font-size: 1.0em;
-    padding-left: 15px;
-    font-weight: bold;
-    font-style: italic;
-}
-.post-content h6 {
-    &:before { content:"⠟"; }
+// ── Kicker / eyebrow (WIRED mono uppercase pattern)
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-caption);
+  display: block;
+  margin-bottom: var(--sp-1);
 }
 
-.post-content .external-link {
-    &:after {
-        content: url("/resource/icon/external-link.svg");
-    }
+// ── Post items — WIRED story tile (no card, no shadow)
+.post-item {
+  border-top: 1px solid var(--color-hairline);
+  padding: var(--sp-3) 0;
+
+  &:hover {
+    background: none;
+    .post-link { color: var(--color-accent); }
+  }
 }
 
-.post-content .tagged-link {
-    &:before { content:"#"; }
+.post-item:hover .post-meta,
+.post-item:hover .post-excerpt {
+  color: var(--color-accent);
+}
+
+// ── Post link
+.post-link {
+  text-decoration: none;
+  color: var(--color-page-ink);
+
+  &:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+  }
+}
+
+// ── Post meta — mono uppercase timestamp (WIRED kicker)
+.post-meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-caption);
+  margin-bottom: var(--sp-1);
+}
+
+.post-excerpt {
+  font-size: 0.9rem;
+  color: var(--color-caption);
+  margin-top: var(--sp-1);
+}
+
+// ── Misc utilities
+.hide    { display: none; }
+.center  { text-align: center; }
+.visible   { display: block; }
+.invisible { display: none; }
+
+video {
+  max-width: 100%;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 0;
+}
+
+// ── Mark / highlight
+mark {
+  color: var(--color-page-ink);
+  background-color: #fff3b0;
+  border-radius: 0;
+  padding: 0 2px;
+}
+
+// ── Link states
+.post-content .external-link::after {
+  content: url("/resource/icon/external-link.svg");
+}
+
+.post-content .tagged-link::before {
+  content: "#";
 }
 
 .link-checked {
-    color: #FFFFFF;
-    background-color: #BA55D3;
-    border-radius: 3px;
-
-    &:visited {
-        color: #FFFFFF;
-    }
+  color: #ffffff;
+  background-color: var(--color-ink);
+  border-radius: 0;
+  &:visited { color: #ffffff; }
 }
 
-mark {
-    color: #275715;
-    background-color: #dbedd4;
-    border-radius: 3px;
+// ── Error links
+.error-link::after {
+  font-style: italic;
+  color: #cc0000;
 }
+.link-404::after  { content: "[404]"; }
+.link-400::after  { content: "[400]"; }
+.link-408::after  { content: "[408]"; }
+.link-500::after  { content: "[500]"; }
 
-.error-link {
-    &:after {
-        font-style: italic;
-        color: red;
-    }
-}
-
-.link-404 {
-    @extend .error-link;
-    &:after {
-        content: "[404 Not Found]"
-    }
-}
-
-.link-400 {
-    @extend .error-link;
-    &:after {
-        content: "[400 Bad Request]"
-    }
-}
-
-.link-408 {
-    @extend .error-link;
-    &:after {
-        content: "[408 Request Timeout]"
-    }
-}
-
-.link-500 {
-    @extend .error-link;
-    &:after {
-        content: "[500 Internal Server Error]"
-    }
-}
-
-.post-item:hover {
-  background-color: #FFF5FF;
-}
-
-video {
-    max-width: 100%;
-}
-
-// 팝업 주석
+// ── Footnote popup
 sup[role=doc-noteref] {
+  position: relative;
+
+  a.footnote {
     position: relative;
-
-    a.footnote {
-        position: relative;
-        padding-bottom: 1em;
-        text-decoration: none;
-
-        &:before { content: "[" }
-        &:after { content: "]" }
-        &:hover {
-            color: #df0000;
-            & + .tooltiptext {
-                color: red;
-                // display: block; // create-link.js 에서 처리한다
-            }
-        }
-
-        & + .tooltiptext {
-            display: none;
-            max-width: 800px;
-            min-width: 300px;
-            background-color: #ffffff;
-            color: $main-font-color;
-            text-align: left;
-            border-radius: 7px;
-            border: 1px solid #df0000;
-            padding: 0px 12px 0px 12px;
-            position: absolute;
-            bottom: 1em;
-            z-index: 1;
-        }
+    padding-bottom: 1em;
+    text-decoration: none;
+    &:before { content: "["; }
+    &:after  { content: "]"; }
+    &:hover {
+      color: var(--color-accent);
+      & + .tooltiptext { display: block; }
     }
+
+    & + .tooltiptext {
+      display: none;
+      max-width: 800px;
+      min-width: 300px;
+      background-color: var(--color-bg);
+      color: var(--color-page-ink);
+      text-align: left;
+      border: 1px solid var(--color-ink);
+      border-radius: 0;
+      padding: 0 var(--sp-3);
+      position: absolute;
+      bottom: 1em;
+      z-index: 1;
+    }
+  }
+}
+
+// ── Section ribbon (WIRED black bar)
+.section-ribbon {
+  background: var(--color-ribbon-bg);
+  color: var(--color-ribbon-fg);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: var(--sp-2) var(--sp-4);
+  display: block;
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+// ── Dark mode toggle button
+#theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-ribbon-fg);
+  padding: 0;
+  line-height: 1.3;
+  padding-right: 10px;
+  transition: color 0.12s;
+
+  &:hover { color: var(--color-accent); }
+}
+
+// ── Footer
+.footer {
+  text-align: center;
+  background: var(--color-footer-bg);
+  color: var(--color-footer-fg);
+  padding: var(--sp-5) var(--sp-4);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+
+  a {
+    color: var(--color-footer-fg);
+    text-decoration: none;
+    &:hover { color: var(--color-accent); }
+  }
+}
+
+// ── hr
+hr {
+  border: none;
+  border-top: 1px solid var(--color-hairline);
+  margin: var(--sp-5) 0;
 }

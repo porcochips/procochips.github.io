@@ -1,85 +1,118 @@
-/* 사이트 최상단 메뉴 바 + 구글 검색 */
-
+// ── WIRED-style header: black bar, mono caps nav
 .header {
-    background-color: $theme-color;
+  background-color: var(--color-ribbon-bg);
+  color: var(--color-ribbon-fg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  height: 40px;
+  border-bottom: 2px solid var(--color-ink);
 
-    &:after {
-        clear: both;
-        content: ' ';
-        display: block;
-    }
+  &:after {
+    clear: both;
+    content: ' ';
+    display: block;
+  }
 
-    // 사이트 이름 (왼쪽)
-    .site-title {
-        float: left;
-        text-decoration: none;
-        color: #FFFFFF;
-        line-height: 1.3;
-        padding-left: 10px;
-        font-style: italic;
-    }
-    // 사이트 이름 (오른쪽: index, random, me)
-    .site-title-right {
-        float: right;
-        text-decoration: none;
-        color: #FFFFFF;
-        line-height: 1.3;
-        padding-right: 10px;
-        font-style: italic;
-    }
+  .site-title {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    text-decoration: none;
+    color: var(--color-ribbon-fg);
+    padding-left: var(--sp-4);
+    font-style: normal;
+    line-height: 40px;
+    transition: color 0.12s;
+
+    &:hover { color: var(--color-accent); }
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .site-title-right {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    color: var(--color-ribbon-fg);
+    padding: 0 var(--sp-3);
+    font-style: normal;
+    line-height: 40px;
+    border-left: 1px solid #333333;
+    transition: color 0.12s;
+    display: block;
+
+    &:hover { color: var(--color-accent); }
+  }
+
+  #theme-toggle {
+    border-left: 1px solid #333333;
+    line-height: 40px;
+    padding: 0 var(--sp-3);
+    height: 40px;
+    display: flex;
+    align-items: center;
+  }
 }
 
-#random-button:hover {
-    cursor: pointer;
+[data-theme="dark"] .header {
+  background-color: #000000;
+  border-bottom-color: #333333;
+
+  .site-title-right { border-left-color: #333333; }
+  #theme-toggle     { border-left-color: #333333; }
 }
 
-// 최상단 구글 검색 입력창
+#random-button:hover { cursor: pointer; }
+
+// ── Search bar
 div.search {
-    background-color: #f6f5ea;
-    width: 100%;
-    position: relative;
-    border-bottom: 1px solid $theme-color;
-    line-height: 1;
+  background-color: var(--color-bg);
+  width: 100%;
+  position: relative;
+  border-bottom: 1px solid var(--color-hairline);
+  line-height: 1;
 }
+
 .searchInput {
-    box-sizing: border-box;
-    background-color: transparent;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    position: relative;
-    padding: 0px;
-    padding-left: 5px;
-    border: 0px;
-    margin: 0px;
-    font-size: 13px;
-    direction: ltr;
-    -webkit-appearance: textfield;
-    border-radius: 0px;
+  box-sizing: border-box;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  position: relative;
+  padding: 0 0 0 var(--sp-2);
+  border: 0;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-page-ink);
+  -webkit-appearance: textfield;
+  border-radius: 0;
 }
 
-// 검색 버튼
 .searchButton {
-    border: 0px;
-    border-radius: 0px;
-    background-color: transparent;
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    z-index: 2;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: 2;
+  cursor: pointer;
 }
 
-// 구글 검색 결과
-div.gsc-control-cse {
-    padding: 0;
-}
-
-.search form.gsc-search-box {
-    margin: 0;
-}
-
-table.gsc-search-box {
-    margin: 0px;
-}
-
+div.gsc-control-cse { padding: 0; }
+.search form.gsc-search-box { margin: 0; }
+table.gsc-search-box { margin: 0; }

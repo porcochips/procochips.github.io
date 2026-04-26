@@ -1,104 +1,113 @@
-/* based on Monokai Theme from https://github.com/richleland/pygments-css/blob/master/monokai.css */
-$background-color: #202030;
-$default-font-color: #fafafa;
+// ── Inline code
 code {
-    font-family: Consolas, "Courier New", Courier;
+  font-family: var(--font-mono);
+  font-size: 0.88em;
+  color: var(--color-code-fg);
+  background-color: var(--color-code-bg);
+  padding: 1px 4px;
+  border-radius: 0;
+
+  a {
     color: inherit;
-    background-color: #f3f4f6;
-    padding: 1px 3px;
-    border-radius: 3px;
-    a {
-        color: inherit;
-        text-decoration: none;
-    }
+    text-decoration: none;
+  }
 }
+
+// ── Code blocks
 pre {
-    font-family:  $coding-font;
-    overflow-x: auto;
-    padding: 10px 10px;
-    color: $default-font-color;
-    background-color: $background-color;
-    border: 1px solid #c6c6c6;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  line-height: 1.5;
+  overflow-x: auto;
+  padding: var(--sp-4);
+  color: var(--color-pre-fg);
+  background-color: var(--color-pre-bg);
+  border: 1px solid var(--color-hairline);
+  border-radius: 0;
+  margin: var(--sp-4) 0;
 }
+
 pre code {
-    color: $default-font-color;
-    background-color: $background-color;
-    padding: 0;
+  color: var(--color-pre-fg);
+  background-color: transparent;
+  padding: 0;
+  font-size: 1em;
 }
 
 div.highlight {
-    font-size: 0.9em;
-    line-height: 1.3;
+  font-size: 0.88em;
+  line-height: 1.4;
+  border-radius: 0;
 }
+
+// ── Syntax highlight (Monokai)
 .highlight {
-    .bp { color: #f8f8f2 } /* Name.Builtin.Pseudo */
-    .c { color: #FED7BF } /* Comment */
-    .c1 { color: #acca8b } /* Comment.Single */
-    .cm { color: #fcba03 } /* Comment.Multiline */
-    .cp { color: #75715e } /* Comment.Preproc */
-    .cs { color: #75715e } /* Comment.Special */
-    // .err { color: #960050; background-color: #1e0010 } /* Error */
-    .gd { color: #f92672; } /* Generic.Deleted & Diff Deleted */
-    .ge { font-style: italic } /* Generic.Emph */
-    .gh { } /* Generic Heading & Diff Header */
-    .gi { color: #a6e22e; } /* Generic.Inserted & Diff Inserted */
-    .gs { font-weight: bold } /* Generic.Strong */
-    .gu { color: #75715e; } /* Generic.Subheading & Diff Unified/Comment? */
-    .hll { background-color: #49483e }
-    .il { color: #ae81ff } /* Literal.Number.Integer.Long */
-    .k { color: #66d9ef } /* Keyword */
-    .kc { color: #66d9ef } /* Keyword.Constant */
-    .kd { color: #00d0a5 } /* Keyword.Declaration */
-    .kn { color: #f92672 } /* Keyword.Namespace */
-    .kp { color: #66d9ef } /* Keyword.Pseudo */
-    .kr { color: #66d9ef } /* Keyword.Reserved */
-    .kt { color: #66d9ef } /* Keyword.Type */
-    .l { color: #ae81ff } /* Literal */
-    .ld { color: #e6db74 } /* Literal.Date */
-    .lineno { color: #ffe5a0; }
-    .m { color: #ae81ff } /* Literal.Number */
-    .mf { color: #ae81ff } /* Literal.Number.Float */
-    .mh { color: #ae81ff } /* Literal.Number.Hex */
-    .mi { color: #f8ff30 } /* Literal.Number.Integer */
-    .mo { color: #ae81ff } /* Literal.Number.Oct */
-    .n { color: #f8f8f2 } /* Name */
-    .na { color: #a6e22e } /* Name.Attribute */
-    .nb { color: #f8f8f2 } /* Name.Builtin */
-    .nc { color: #ff8080 } /* Name.Class */
-    .nd { color: #a6e22e } /* Name.Decorator */
-    .ne { color: #a6e22e } /* Name.Exception */
-    .nf { color: #bed6ff} /* Name.Function */
-    .ni { color: #f8f8f2 } /* Name.Entity */
-    .nl { color: #f8f8f2 } /* Name.Label */
-    .nn { color: #f8f8f2 } /* Name.Namespace */
-    .no { color: #66d9ef } /* Name.Constant */
-    .nt { color: #26cff9 } /* Name.Tag */
-    .nv { color: #bed6ff } /* Name.Variable */
-    .nx { color: #a6e22e } /* Name.Other */
-    .o { color: #cc7832 } /* Operator */
-    .ow { color: #f92672 } /* Operator.Word */
-    .p { color: #f8f8f2 } /* Punctuation */
-    .py { color: #f8f8f2 } /* Name.Property */
-    .s { color: #e6db74 } /* Literal.String */
-    .s1 { color: #e6db74 } /* Literal.String.Single */
-    .s2 { color: #e6db74 } /* Literal.String.Double */
-    .sb { color: #e6db74 } /* Literal.String.Backtick */
-    .sc { color: #e6db74 } /* Literal.String.Char */
-    .sd { color: #e6db74 } /* Literal.String.Doc */
-    .se { color: #ae81ff } /* Literal.String.Escape */
-    .sh { color: #e6db74 } /* Literal.String.Heredoc */
-    .si { color: #e6db74 } /* Literal.String.Interpol */
-    .sr { color: #e6db74 } /* Literal.String.Regex */
-    .ss { color: #e6db74 } /* Literal.String.Symbol */
-    .sx { color: #e6db74 } /* Literal.String.Other */
-    .vc { color: #f8f8f2 } /* Name.Variable.Class */
-    .vg { color: #f8f8f2 } /* Name.Variable.Global */
-    .vi { color: #f8f8f2 } /* Name.Variable.Instance */
-    .w { color: #d0d0d0 } /* Text.Whitespace */
+  .bp { color: #f8f8f2 }
+  .c  { color: #FED7BF }
+  .c1 { color: #acca8b }
+  .cm { color: #fcba03 }
+  .cp { color: #75715e }
+  .cs { color: #75715e }
+  .gd { color: #f92672 }
+  .ge { font-style: italic }
+  .gi { color: #a6e22e }
+  .gs { font-weight: bold }
+  .gu { color: #75715e }
+  .hll { background-color: #49483e }
+  .il { color: #ae81ff }
+  .k  { color: #66d9ef }
+  .kc { color: #66d9ef }
+  .kd { color: #00d0a5 }
+  .kn { color: #f92672 }
+  .kp { color: #66d9ef }
+  .kr { color: #66d9ef }
+  .kt { color: #66d9ef }
+  .l  { color: #ae81ff }
+  .ld { color: #e6db74 }
+  .lineno { color: #ffe5a0 }
+  .m  { color: #ae81ff }
+  .mf { color: #ae81ff }
+  .mh { color: #ae81ff }
+  .mi { color: #f8ff30 }
+  .mo { color: #ae81ff }
+  .n  { color: #f8f8f2 }
+  .na { color: #a6e22e }
+  .nb { color: #f8f8f2 }
+  .nc { color: #ff8080 }
+  .nd { color: #a6e22e }
+  .ne { color: #a6e22e }
+  .nf { color: #bed6ff }
+  .ni { color: #f8f8f2 }
+  .nl { color: #f8f8f2 }
+  .nn { color: #f8f8f2 }
+  .no { color: #66d9ef }
+  .nt { color: #26cff9 }
+  .nv { color: #bed6ff }
+  .nx { color: #a6e22e }
+  .o  { color: #cc7832 }
+  .ow { color: #f92672 }
+  .p  { color: #f8f8f2 }
+  .py { color: #f8f8f2 }
+  .s  { color: #e6db74 }
+  .s1 { color: #e6db74 }
+  .s2 { color: #e6db74 }
+  .sb { color: #e6db74 }
+  .sc { color: #e6db74 }
+  .sd { color: #e6db74 }
+  .se { color: #ae81ff }
+  .sh { color: #e6db74 }
+  .si { color: #e6db74 }
+  .sr { color: #e6db74 }
+  .ss { color: #e6db74 }
+  .sx { color: #e6db74 }
+  .vc { color: #f8f8f2 }
+  .vg { color: #f8f8f2 }
+  .vi { color: #f8f8f2 }
+  .w  { color: #d0d0d0 }
 }
 
 .language-ascii-art {
-    display: inline-block;
-    letter-spacing: -0.1em;
-    line-height: 1.0em;
+  display: inline-block;
+  letter-spacing: -0.1em;
+  line-height: 1.0em;
 }

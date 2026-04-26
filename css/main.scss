@@ -2,28 +2,98 @@
 ---
 @charset "utf-8";
 
-$base-font-family  : Arial;
+// ── SUIT Variable Font (Korean + English)
+@font-face {
+  font-family: 'SUIT';
+  src: url('https://cdn.jsdelivr.net/gh/sunn-us/SUIT@main/fonts/variable/woff2/SUIT-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+// ── Fira Code (code blocks)
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap');
+
+// ── Design tokens
+:root {
+  // Color — Light mode (default)
+  --color-ink:        #000000;
+  --color-page-ink:   #1a1a1a;
+  --color-bg:         #ffffff;
+  --color-bg-page:    #ffffff;
+  --color-caption:    #757575;
+  --color-disabled:   #999999;
+  --color-hairline:   #e2e8f0;
+  --color-rule:       #000000;
+  --color-accent:     #057dbc;
+  --color-footer-bg:  #1a1a1a;
+  --color-footer-fg:  #ffffff;
+  --color-ribbon-bg:  #000000;
+  --color-ribbon-fg:  #ffffff;
+  --color-code-bg:    #f4f4f4;
+  --color-code-fg:    #1a1a1a;
+  --color-pre-bg:     #202030;
+  --color-pre-fg:     #fafafa;
+  --color-border:     #d0d0d0;
+
+  // Typography
+  --font-body:   'SUIT', -apple-system, sans-serif;
+  --font-mono:   'Fira Code', 'Courier New', monospace;
+  --font-ui:     'SUIT', -apple-system, sans-serif;
+
+  // Spacing (8px base)
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+}
+
+[data-theme="dark"] {
+  --color-ink:        #ffffff;
+  --color-page-ink:   #e8e8e8;
+  --color-bg:         #111111;
+  --color-bg-page:    #111111;
+  --color-caption:    #888888;
+  --color-disabled:   #555555;
+  --color-hairline:   #2a2a2a;
+  --color-rule:       #ffffff;
+  --color-accent:     #4ab3f4;
+  --color-footer-bg:  #000000;
+  --color-footer-fg:  #e8e8e8;
+  --color-ribbon-bg:  #ffffff;
+  --color-ribbon-fg:  #000000;
+  --color-code-bg:    #1e1e1e;
+  --color-code-fg:    #e8e8e8;
+  --color-pre-bg:     #0d0d0d;
+  --color-pre-fg:     #fafafa;
+  --color-border:     #333333;
+}
+
+// ── Legacy SCSS vars (keep for compatibility)
+$base-font-family  : var(--font-body);
 $default-font-size : 0.9rem;
-$default-font-color : #000;
-$second-font-color : #503e2b;
-$third-font-color : #9e948a;
-$forth-font-color : #808094;
+$default-font-color : #1a1a1a;
+$second-font-color : #757575;
+$third-font-color  : #999999;
+$forth-font-color  : #757575;
 $small-font-size   : $default-font-size * 0.8;
 $base-line-height  : 1.5;
+$coding-font       : 'Fira Code', 'Courier New', monospace;
+$theme-color       : #000000;
 
-$coding-font: Consolas, "Courier New", Courier;
-$theme-color: #47146C;
-
-// Import from 'sass_dir' (default: _sass)
 @import
-    "base",
-    "layout",
-    "code",
-    "index",
-    "details",
-    "tag",
-    "post-table",
-    "post-metadata",
-    "site-menu-bar",
-    "toc"
+  "base",
+  "layout",
+  "code",
+  "index",
+  "details",
+  "tag",
+  "post-table",
+  "post-metadata",
+  "site-menu-bar",
+  "toc"
 ;
