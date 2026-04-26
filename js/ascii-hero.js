@@ -81,7 +81,9 @@
       });
     }
 
-    requestAnimationFrame(frame);
+    document.fonts.load('100 1rem "Roboto Flex"').then(function() {
+      requestAnimationFrame(frame);
+    });
   }
 
   if (document.readyState === 'loading') {
