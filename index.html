@@ -18,7 +18,7 @@ regenerate: true
     <div>
     </div>
     <div>
-        <a href="/blog/">블로그</a>
+        <a href="/blog/">로그</a>
         /
         <a href="/tag/">태그</a>
         <p>단축키 도움말: ctrl + h</p>
@@ -37,7 +37,7 @@ regenerate: true
     </div>
 </div>
 <div>
-    <H3 class="indent">최근 포스트</H3>
+    <H3 class="indent">최근 로그</H3>
     <ul class="post-list">
 {% assign posts = site.posts | sort: 'date' | reverse %}
 {% for post in posts limit: 10 %}
@@ -61,7 +61,7 @@ regenerate: true
 {% endfor %}
     </ul>
     <h4>
-        <a href="/blog/">전체 포스트 리스트 보기 ({{ site.posts | size }} 항목)</a>
+        <a href="/blog/">전체 로그 리스트 보기 ({{ site.posts | size }} 항목)</a>
     </h4>
 
     <H3 class="indent">최근 위키</H3>
