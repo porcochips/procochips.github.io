@@ -37,11 +37,35 @@ regenerate: true
     </div>
 </div>
 <div>
+    <H3 class="indent">최근 포스트</H3>
+    <ul class="post-list">
+{% assign posts = site.posts | sort: 'date' | reverse %}
+{% for post in posts limit: 10 %}
+    {% if post.public == true %}
+        <li>
+            <div class="post-item">
+                <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
+                    <div class="post-meta">
+                        {{ post.date | date: "%Y.%m.%d" }}
+                        -
+                        {{ post.title }}
+                    </div>
+                    <div class="post-excerpt">{{ post.summary }}</div>
+                    <ul class="tag-list">
+                        <li class="post-tag">{{ post.tag }}</li>
+                    </ul>
+                </a>
+            </div>
+        </li>
+    {% endif %}
+{% endfor %}
+    </ul>
+
     <H3 class="indent">최근 변경된 문서</H3>
     <ul class="post-list">
 {% assign documents = site.wiki | sort: 'updated' | reverse %}
-{% for doc in documents limit: 30 %}
-    {% if doc.public == true and doc.title != 'wiki'%}
+{% for doc in documents limit: 20 %}
+    {% if doc.public == true and doc.title != 'wiki' %}
         <li>
             <div class="post-item">
                 <a class="post-link" href="{{ doc.url | prepend: site.baseurl }}">
@@ -52,9 +76,7 @@ regenerate: true
                     </div>
                     <div class="post-excerpt">{{ doc.summary }}</div>
                     <ul class="tag-list">
-                        <li class="post-tag">
-                            {{ doc. tag }}
-                        </li>
+                        <li class="post-tag">{{ doc.tag }}</li>
                     </ul>
                 </a>
             </div>
