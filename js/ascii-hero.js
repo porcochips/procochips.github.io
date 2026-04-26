@@ -20,10 +20,11 @@
     var wrapper = document.createElement('div');
     wrapper.style.cssText = [
       'display:flex',
-      'align-items:center',
+      'align-items:flex-start',
       'justify-content:center',
       'width:100%',
       'height:100%',
+      'padding-top:16px',
     ].join(';');
     container.appendChild(wrapper);
 

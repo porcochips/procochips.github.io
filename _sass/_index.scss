@@ -1,8 +1,16 @@
+// ── Homepage video
+.porco-video {
+  display: block;
+  width: 40%;
+  margin: 0 auto;
+}
+
 // ── ASCII hero container
 .ascii-hero {
   position: relative;
   width: 100%;
-  height: 260px;
+  height: auto;
+  padding: var(--sp-4) 0 var(--sp-4);
   background: var(--color-bg);
   overflow: hidden;
   border-bottom: 2px solid var(--color-ink);
