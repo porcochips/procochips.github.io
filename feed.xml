@@ -5,8 +5,8 @@
     <description></description>
     <link>https://porcochips.github.io/</link>
     <atom:link href="https://porcochips.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 26 Apr 2026 19:08:10 +0900</pubDate>
-    <lastBuildDate>Sun, 26 Apr 2026 19:08:10 +0900</lastBuildDate>
+    <pubDate>Sun, 26 Apr 2026 19:10:50 +0900</pubDate>
+    <lastBuildDate>Sun, 26 Apr 2026 19:10:50 +0900</lastBuildDate>
     <generator>Jekyll v4.1.1</generator>
 
 
@@ -52,6 +52,17 @@
       </item>
     
 
+
+      <item>
+        <title>hello</title>
+        <description>&lt;p&gt;첫 번째 포스트입니다.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 26 Apr 2026 10:00:00 +0900</pubDate>
+        <link>https://porcochips.github.io/blog/2026/04/26/hello/</link>
+        <guid isPermaLink="true">https://porcochips.github.io/blog/2026/04/26/hello/</guid>
+        
+        
+      </item>
 
       <item>
         <title>Next JWP Study 16</title>
