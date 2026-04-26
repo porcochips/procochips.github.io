@@ -4,7 +4,7 @@
   var RADIUS      = 150;
   var FROM_WEIGHT = 100;
   var TO_WEIGHT   = 900;
-  var TEXT        = "proco's chips";
+  var TEXT        = "porco's chips";
 
   function lerp(a, b, t) { return a + (b - a) * t; }
 
