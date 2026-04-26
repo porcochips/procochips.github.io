@@ -1,176 +1,89 @@
 (function () {
   'use strict';
 
-  const CHARSET = " .`'^\",:;Il!i~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
+  const CHARSET = " .,:;i1tfLCG08@";
+  const TEXT    = "proco's chips";
+  const FONT_PX = 7;
 
-  function isDark() {
-    return document.documentElement.getAttribute('data-theme') === 'dark';
-  }
+  function init() {
+    var container = document.getElementById('ascii-hero-container');
+    if (!container) return;
 
-  class AsciiHero {
-    constructor(container) {
-      this.container = container;
-      this.mouse = { x: 0.5, y: 0.5 };
-      this.time  = 0;
+    var pre = document.createElement('pre');
+    pre.style.cssText = [
+      'margin:0', 'padding:8px 0', 'line-height:1em',
+      'font-family:"Fira Code",monospace', 'font-size:7px',
+      'color:#1a1a1a', 'background:transparent',
+      'text-align:center', 'overflow:hidden',
+      'width:100%', 'box-sizing:border-box',
+    ].join(';');
+    container.appendChild(pre);
 
-      // off-screen canvas for text rendering
-      this.textCanvas = document.createElement('canvas');
-      this.textCtx    = this.textCanvas.getContext('2d');
+    var offscreen = document.createElement('canvas');
+    var offCtx    = offscreen.getContext('2d', { willReadFrequently: true });
 
-      // visible pre element for ASCII output
-      this.pre = document.createElement('pre');
-      Object.assign(this.pre.style, {
-        margin: '0', padding: '0',
-        lineHeight: '1em',
-        position: 'absolute',
-        inset: '0',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontFamily: "'Fira Code', monospace",
-        fontSize: '8px',
-        userSelect: 'none',
-        pointerEvents: 'none',
-        backgroundImage: 'radial-gradient(circle, #ff6188 0%, #fc9867 40%, #ffd866 100%)',
-        backgroundAttachment: 'fixed',
-        webkitBackgroundClip: 'text',
-        backgroundClip: 'text',
-        webkitTextFillColor: 'transparent',
-        color: 'transparent',
-        overflow: 'hidden',
-        whiteSpace: 'pre',
-      });
-      container.appendChild(this.pre);
+    var mouseX = 0.5, mouseY = 0.5;
+    container.addEventListener('mousemove', function(e) {
+      var b = container.getBoundingClientRect();
+      mouseX = (e.clientX - b.left) / b.width;
+      mouseY = (e.clientY - b.top)  / b.height;
+    });
+    container.addEventListener('mouseleave', function() {
+      mouseX = 0.5; mouseY = 0.5;
+    });
 
-      // read-back canvas (tiny, for pixel sampling)
-      this.sampleCanvas = document.createElement('canvas');
-      this.sampleCtx    = this.sampleCanvas.getContext('2d', { willReadFrequently: true });
+    function frame(ts) {
+      requestAnimationFrame(frame);
 
-      this._bindEvents();
-      this._observe();
-    }
+      var b    = container.getBoundingClientRect();
+      var W    = b.width  || 800;
+      var H    = b.height || 200;
+      var cols = Math.floor(W / (FONT_PX * 0.6));
+      var rows = Math.floor(H / FONT_PX);
 
-    _bindEvents() {
-      this.container.addEventListener('mousemove', e => {
-        const b = this.container.getBoundingClientRect();
-        this.mouse.x = (e.clientX - b.left) / b.width;
-        this.mouse.y = (e.clientY - b.top)  / b.height;
-      });
-      this.container.addEventListener('mouseleave', () => {
-        this.mouse = { x: 0.5, y: 0.5 };
-      });
-    }
+      offscreen.width  = cols;
+      offscreen.height = rows;
 
-    _observe() {
-      const ro = new ResizeObserver(() => this._computeSize());
-      ro.observe(this.container);
-    }
+      // tilt based on mouse
+      var tiltX = (mouseY - 0.5) * 0.35;
+      var tiltY = (mouseX - 0.5) * 0.35;
 
-    _computeSize() {
-      const b = this.container.getBoundingClientRect();
-      this.W = b.width  || 800;
-      this.H = b.height || 220;
-    }
-
-    _drawText(t) {
-      const fontSize = 160;
-      const text = "proco's chips";
-      const font = `700 ${fontSize}px SUIT, sans-serif`;
-
-      // measure
-      this.textCtx.font = font;
-      const m = this.textCtx.measureText(text);
-      const tw = Math.ceil(m.width) + 20;
-      const th = Math.ceil(m.actualBoundingBoxAscent + m.actualBoundingBoxDescent) + 20;
-
-      this.textCanvas.width  = tw;
-      this.textCanvas.height = th;
-
-      this.textCtx.clearRect(0, 0, tw, th);
-      this.textCtx.fillStyle = isDark() ? '#e8e8e8' : '#1a1a1a';
-      this.textCtx.font = font;
-      this.textCtx.fillText(text, 10, 10 + m.actualBoundingBoxAscent);
-
-      return { tw, th };
-    }
-
-    _frame(t) {
-      this.time = t * 0.001;
-      const { tw, th } = this._drawText(this.time);
-
-      // ASCII grid dimensions
-      const FONT_W = 5;
-      const FONT_H = 8;
-      const cols = Math.floor(this.W / FONT_W);
-      const rows = Math.floor(this.H / FONT_H);
-
-      this.sampleCanvas.width  = cols;
-      this.sampleCanvas.height = rows;
-
-      const ctx = this.sampleCtx;
-      ctx.clearRect(0, 0, cols, rows);
-
-      // mouse-driven tilt (CSS transform on textCanvas)
-      const tiltX = (this.mouse.y - 0.5) * 0.4;
-      const tiltY = (this.mouse.x - 0.5) * 0.4;
-
-      // wave offset
-      const waveAmp = 6;
-      const waveFreq = 2;
-
-      // draw text with perspective warp via canvas transform
-      ctx.save();
-      ctx.translate(cols / 2, rows / 2);
-
-      // simple scale + skew for pseudo-3D tilt
-      const scaleX = Math.cos(tiltY) * 0.9;
-      const scaleY = Math.cos(tiltX) * 0.9;
-      const skewX  = Math.sin(tiltX) * 0.3;
-      const skewY  = Math.sin(tiltY) * 0.3;
-
-      ctx.transform(scaleX, skewY, skewX, scaleY, 0, 0);
-
-      const destW = cols * 0.9;
-      const destH = rows * 0.9;
-      ctx.drawImage(
-        this.textCanvas,
-        -destW / 2, -destH / 2,
-        destW, destH
+      offCtx.clearRect(0, 0, cols, rows);
+      offCtx.save();
+      offCtx.translate(cols / 2, rows / 2);
+      offCtx.transform(
+        Math.cos(tiltY) * 0.95,
+        Math.sin(tiltX) * 0.3,
+        Math.sin(tiltY) * -0.3,
+        Math.cos(tiltX) * 0.95,
+        0, 0
       );
-      ctx.restore();
 
-      // sample pixels → ASCII
-      const imgData = ctx.getImageData(0, 0, cols, rows).data;
-      let str = '';
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          const i = (c + r * cols) * 4;
-          const a = imgData[i + 3];
+      var fontSize = rows * 0.75;
+      offCtx.font = 'bold ' + fontSize + 'px SUIT, sans-serif';
+      offCtx.textAlign    = 'center';
+      offCtx.textBaseline = 'middle';
+      offCtx.fillStyle    = '#fff';
+      offCtx.fillText(TEXT, 0, 0);
+      offCtx.restore();
+
+      var imgData = offCtx.getImageData(0, 0, cols, rows).data;
+      var str = '';
+      for (var r = 0; r < rows; r++) {
+        for (var c = 0; c < cols; c++) {
+          var i    = (c + r * cols) * 4;
+          var a    = imgData[i + 3];
           if (a < 10) { str += ' '; continue; }
-          const gray = (0.3 * imgData[i] + 0.6 * imgData[i+1] + 0.1 * imgData[i+2]) / 255;
-          const idx  = Math.floor(gray * (CHARSET.length - 1));
+          var gray = (imgData[i] * 0.3 + imgData[i+1] * 0.6 + imgData[i+2] * 0.1) / 255;
+          var idx  = Math.floor(gray * (CHARSET.length - 1));
           str += CHARSET[CHARSET.length - 1 - idx];
         }
         str += '\n';
       }
-      this.pre.textContent = str;
+      pre.textContent = str;
     }
 
-    start() {
-      this._computeSize();
-      const loop = (t) => {
-        this._raf = requestAnimationFrame(loop);
-        this._frame(t);
-      };
-      requestAnimationFrame(loop);
-    }
-  }
-
-  function init() {
-    const container = document.getElementById('ascii-hero-container');
-    if (!container) return;
-    const hero = new AsciiHero(container);
-    hero.start();
+    requestAnimationFrame(frame);
   }
 
   if (document.readyState === 'loading') {
