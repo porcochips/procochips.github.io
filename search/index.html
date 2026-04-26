@@ -121,20 +121,53 @@
 <script async src="/js/shortcut.js"></script>
 
     <body>
-         <div id="home-search">
-     <script>
-         (function() {
-             var cx = '009589569786427844174:n5gsvy4rj58';
-             var gcse = document.createElement('script');
-             gcse.type = 'text/javascript';
-             gcse.async = true;
-             gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-             var s = document.getElementsByTagName('script')[0];
-             s.parentNode.insertBefore(gcse, s);
-         })();
-     </script>
-     <gcse:search linkTarget="_parent" queryParameterName="searchString"></gcse:search>
- </div>
+        <div id="search-wrap" style="padding: var(--sp-4);">
+  <div id="search-results"></div>
+</div>
+
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var query = (params.get('searchString') || '').trim().toLowerCase();
+  var container = document.getElementById('search-results');
+
+  if (!query) {
+    container.innerHTML = '<p style="color:var(--color-caption)">검색어를 입력하세요.</p>';
+    return;
+  }
+
+  fetch('/search.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var results = data.filter(function(item) {
+        return (item.title + ' ' + item.summary + ' ' + item.tag).toLowerCase().indexOf(query) !== -1;
+      });
+
+      if (results.length === 0) {
+        container.innerHTML = '<p style="color:var(--color-caption)">"' + query + '" 검색 결과가 없습니다.</p>';
+        return;
+      }
+
+      var html = '<p style="font-family:var(--font-mono);font-size:0.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--color-caption);margin-bottom:var(--sp-3)">'
+        + results.length + ' results for "' + query + '"</p>'
+        + '<ul class="post-list">';
+
+      results.forEach(function(item) {
+        html += '<li><div class="post-item"><a class="post-link" href="' + item.url + '">'
+          + '<div class="post-meta">' + item.date + (item.tag ? ' · ' + item.tag : '') + '</div>'
+          + '<div style="font-weight:600;margin:2px 0">' + item.title + '</div>'
+          + (item.summary ? '<div class="post-excerpt">' + item.summary + '</div>' : '')
+          + '</a></div></li>';
+      });
+
+      html += '</ul>';
+      container.innerHTML = html;
+    })
+    .catch(function() {
+      container.innerHTML = '<p style="color:var(--color-caption)">검색 중 오류가 발생했습니다.</p>';
+    });
+})();
+</script>
 
         <footer class="footer">
     <div>
