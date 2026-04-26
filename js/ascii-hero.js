@@ -320,8 +320,8 @@
     const container = document.getElementById('ascii-hero-container');
     if (!container) return;
 
-    // Load Three.js from CDN
-    const { default: THREE } = await import('https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.js');
+    const THREE = window.THREE;
+    if (!THREE) { console.error('Three.js not loaded'); return; }
 
     const hero = new AsciiHero(container, {
       text: "proco's chips",
