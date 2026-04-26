@@ -30,7 +30,7 @@
     // text element
     var textEl = document.createElement('div');
     textEl.style.cssText = [
-      'font-family:"SUIT",sans-serif',
+      'font-family:"Roboto Flex",sans-serif',
       'font-size:clamp(2.5rem, 8vw, 4.5rem)',
       'font-weight:100',
       'line-height:1',

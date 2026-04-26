@@ -1,8 +1,8 @@
 @charset "UTF-8";
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap");
 @font-face { font-family: 'SUIT'; src: url("https://cdn.jsdelivr.net/gh/sunn-us/SUIT@main/fonts/variable/woff2/SUIT-Variable.woff2") format("woff2-variations"); font-weight: 100 900; font-style: normal; font-display: swap; }
 
-:root { --color-ink:        #000000; --color-page-ink:   #1a1a1a; --color-bg:         #ffffff; --color-bg-page:    #ffffff; --color-caption:    #757575; --color-disabled:   #999999; --color-hairline:   #e2e8f0; --color-rule:       #000000; --color-accent:     #057dbc; --color-footer-bg:  #1a1a1a; --color-footer-fg:  #ffffff; --color-ribbon-bg:  #000000; --color-ribbon-fg:  #ffffff; --color-code-bg:    #f4f4f4; --color-code-fg:    #1a1a1a; --color-pre-bg:     #202030; --color-pre-fg:     #fafafa; --color-border:     #d0d0d0; --font-body:   'SUIT', -apple-system, sans-serif; --font-mono:   'Fira Code', 'Courier New', monospace; --font-ui:     'SUIT', -apple-system, sans-serif; --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; }
+:root { --color-ink:        #000000; --color-page-ink:   #1a1a1a; --color-bg:         #faf9f7; --color-bg-page:    #faf9f7; --color-caption:    #9f9b93; --color-disabled:   #bbb8b2; --color-hairline:   #dad4c8; --color-rule:       #000000; --color-accent:     #057dbc; --color-footer-bg:  #1a1a1a; --color-footer-fg:  #ffffff; --color-ribbon-bg:  #000000; --color-ribbon-fg:  #ffffff; --color-code-bg:    #eee9df; --color-code-fg:    #1a1a1a; --color-pre-bg:     #202030; --color-pre-fg:     #fafafa; --color-border:     #dad4c8; --font-body:   'SUIT', -apple-system, sans-serif; --font-mono:   'Fira Code', 'Courier New', monospace; --font-ui:     'SUIT', -apple-system, sans-serif; --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; }
 
 [data-theme="dark"] { --color-ink:        #ffffff; --color-page-ink:   #e8e8e8; --color-bg:         #111111; --color-bg-page:    #111111; --color-caption:    #888888; --color-disabled:   #555555; --color-hairline:   #2a2a2a; --color-rule:       #ffffff; --color-accent:     #4ab3f4; --color-footer-bg:  #000000; --color-footer-fg:  #e8e8e8; --color-ribbon-bg:  #ffffff; --color-ribbon-fg:  #000000; --color-code-bg:    #1e1e1e; --color-code-fg:    #e8e8e8; --color-pre-bg:     #0d0d0d; --color-pre-fg:     #fafafa; --color-border:     #333333; }
 
@@ -16,33 +16,33 @@ a:hover { color: var(--color-accent); }
 
 a:visited { color: var(--color-page-ink); }
 
-h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); color: var(--color-page-ink); font-weight: 700; line-height: 1.1; letter-spacing: -0.3px; margin-top: var(--sp-6); margin-bottom: var(--sp-3); }
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); color: var(--color-page-ink); font-weight: 700; line-height: 1.25; letter-spacing: -0.2px; margin-top: var(--sp-6); margin-bottom: var(--sp-3); }
 
-h1 { font-size: 2.2rem; letter-spacing: -0.5px; margin: 0; }
+h1 { font-size: 1.7rem; letter-spacing: -0.4px; margin-top: 0; margin-bottom: var(--sp-3); }
 
-h2 { font-size: 1.6rem; border-bottom: 1px solid var(--color-hairline); padding-bottom: var(--sp-1); }
+h2 { font-size: 1.3rem; border-bottom: 1px solid var(--color-hairline); padding-bottom: var(--sp-1); }
 
-h3 { font-size: 1.3rem; }
+h3 { font-size: 1.1rem; }
 
-h4 { font-size: 1.1rem; }
+h4 { font-size: 1.0rem; }
 
-h5 { font-size: 1.0rem; }
+h5 { font-size: 0.9rem; }
 
-h6 { font-size: 0.9rem; font-weight: 600; }
+h6 { font-size: 0.85rem; font-weight: 600; }
 
-.post-content h1 { border-bottom: 2px solid var(--color-ink); }
+.post-content h1 { font-size: 1.4rem; border-bottom: 1px solid var(--color-hairline); padding-bottom: var(--sp-1); }
 
-.post-content h2:before { color: var(--color-caption); }
+.post-content h2 { font-size: 1.2rem; }
 
-.post-content h3 { font-style: normal; }
+.post-content h3 { font-size: 1.05rem; font-style: normal; }
 
-.post-content h4 { font-style: normal; padding-left: 0; }
+.post-content h4 { font-size: 1.0rem; font-style: normal; padding-left: 0; }
 
-.post-content h5 { font-style: normal; padding-left: 0; }
+.post-content h5 { font-size: 0.9rem; font-style: normal; padding-left: 0; }
 
-p, li { color: var(--color-page-ink); line-height: 1.75; }
+p, li { color: var(--color-page-ink); line-height: 1.8; }
 
-.post-content { line-height: 1.75; }
+.post-content { font-size: 0.975rem; line-height: 1.85; }
 
 blockquote { font-family: var(--font-body); background: var(--color-bg); margin: var(--sp-4) 0; padding: var(--sp-3) var(--sp-4); border-left: 3px solid var(--color-ink); border-radius: 0; }
 
@@ -134,7 +134,15 @@ hr { border: none; border-top: 1px solid var(--color-hairline); margin: var(--sp
 
 .page-content img { max-width: 100%; border-radius: 0; }
 
-.post { overflow-x: auto; padding: var(--sp-4); }
+.post { overflow-x: auto; padding: var(--sp-2) var(--sp-3); }
+
+.post-header { padding-bottom: var(--sp-2); border-bottom: 2px solid var(--color-ink); margin-bottom: var(--sp-4); }
+
+.post-header-meta { display: flex; align-items: center; gap: var(--sp-3); margin-top: var(--sp-2); margin-bottom: var(--sp-2); }
+
+.created-date { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 400; text-transform: uppercase; letter-spacing: 1px; color: var(--color-caption); }
+
+.post-summary { font-size: 1.0rem; color: var(--color-caption); line-height: 1.6; margin: var(--sp-2) 0 0; font-weight: 400; }
 
 ul.tag-list { list-style-type: none; margin: 0; padding: 0; overflow: hidden; }
 
