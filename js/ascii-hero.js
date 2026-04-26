@@ -48,7 +48,9 @@
       var tiltX = (mouseY - 0.5) * 0.35;
       var tiltY = (mouseX - 0.5) * 0.35;
 
-      offCtx.clearRect(0, 0, cols, rows);
+      // white background + black text → inversion gives dense chars for text
+      offCtx.fillStyle = '#ffffff';
+      offCtx.fillRect(0, 0, cols, rows);
       offCtx.save();
       offCtx.translate(cols / 2, rows / 2);
       offCtx.transform(
@@ -63,7 +65,7 @@
       offCtx.font = 'bold ' + fontSize + 'px SUIT, sans-serif';
       offCtx.textAlign    = 'center';
       offCtx.textBaseline = 'middle';
-      offCtx.fillStyle    = '#fff';
+      offCtx.fillStyle    = '#000000';
       offCtx.fillText(TEXT, 0, 0);
       offCtx.restore();
 
@@ -72,8 +74,6 @@
       for (var r = 0; r < rows; r++) {
         for (var c = 0; c < cols; c++) {
           var i    = (c + r * cols) * 4;
-          var a    = imgData[i + 3];
-          if (a < 10) { str += ' '; continue; }
           var gray = (imgData[i] * 0.3 + imgData[i+1] * 0.6 + imgData[i+2] * 0.1) / 255;
           var idx  = Math.floor(gray * (CHARSET.length - 1));
           str += CHARSET[CHARSET.length - 1 - idx];
