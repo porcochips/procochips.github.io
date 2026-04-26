@@ -1,86 +1,84 @@
 (function () {
   'use strict';
 
-  const CHARSET = " .,:;i1tfLCG08@";
-  const TEXT    = "proco's chips";
-  const FONT_PX = 7;
+  var RADIUS      = 150;
+  var FROM_WEIGHT = 100;
+  var TO_WEIGHT   = 900;
+  var TEXT        = "proco's chips";
+
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  function falloff(dist) {
+    return Math.max(0, 1 - dist / RADIUS);
+  }
 
   function init() {
     var container = document.getElementById('ascii-hero-container');
     if (!container) return;
 
-    var pre = document.createElement('pre');
-    pre.style.cssText = [
-      'margin:0', 'padding:8px 0', 'line-height:1em',
-      'font-family:"Fira Code",monospace', 'font-size:7px',
-      'color:#1a1a1a', 'background:transparent',
-      'text-align:center', 'overflow:hidden',
-      'width:100%', 'box-sizing:border-box',
+    // wrapper
+    var wrapper = document.createElement('div');
+    wrapper.style.cssText = [
+      'display:flex',
+      'align-items:center',
+      'justify-content:center',
+      'width:100%',
+      'height:100%',
     ].join(';');
-    container.appendChild(pre);
+    container.appendChild(wrapper);
 
-    var offscreen = document.createElement('canvas');
-    var offCtx    = offscreen.getContext('2d', { willReadFrequently: true });
+    // text element
+    var textEl = document.createElement('div');
+    textEl.style.cssText = [
+      'font-family:"SUIT",sans-serif',
+      'font-size:clamp(2.5rem, 8vw, 4.5rem)',
+      'font-weight:100',
+      'line-height:1',
+      'letter-spacing:-0.02em',
+      'color:var(--color-page-ink)',
+      'user-select:none',
+      'cursor:default',
+    ].join(';');
+    wrapper.appendChild(textEl);
 
-    var mouseX = 0.5, mouseY = 0.5;
-    container.addEventListener('mousemove', function(e) {
-      var b = container.getBoundingClientRect();
-      mouseX = (e.clientX - b.left) / b.width;
-      mouseY = (e.clientY - b.top)  / b.height;
+    // split into letter spans
+    var letterSpans = [];
+    TEXT.split('').forEach(function(ch) {
+      var span = document.createElement('span');
+      span.style.cssText = 'display:inline-block;transition:font-variation-settings 0.05s;';
+      span.style.fontVariationSettings = "'wght' " + FROM_WEIGHT;
+      span.textContent = ch === ' ' ? ' ' : ch;
+      textEl.appendChild(span);
+      letterSpans.push(ch === ' ' ? null : span);
     });
+
+    // mouse tracking
+    var mouseX = -9999;
+    var mouseY = -9999;
+
+    window.addEventListener('mousemove', function(e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
     container.addEventListener('mouseleave', function() {
-      mouseX = 0.5; mouseY = 0.5;
+      mouseX = -9999;
+      mouseY = -9999;
     });
 
-    function frame(ts) {
+    // animation loop
+    function frame() {
       requestAnimationFrame(frame);
-
-      var b    = container.getBoundingClientRect();
-      var W    = b.width  || 800;
-      var H    = b.height || 200;
-      var cols = Math.floor(W / (FONT_PX * 0.6));
-      var rows = Math.floor(H / FONT_PX);
-
-      offscreen.width  = cols;
-      offscreen.height = rows;
-
-      // tilt based on mouse
-      var tiltX = (mouseY - 0.5) * 0.35;
-      var tiltY = (mouseX - 0.5) * 0.35;
-
-      // white background + black text → inversion gives dense chars for text
-      offCtx.fillStyle = '#ffffff';
-      offCtx.fillRect(0, 0, cols, rows);
-      offCtx.save();
-      offCtx.translate(cols / 2, rows / 2);
-      offCtx.transform(
-        Math.cos(tiltY) * 0.95,
-        Math.sin(tiltX) * 0.3,
-        Math.sin(tiltY) * -0.3,
-        Math.cos(tiltX) * 0.95,
-        0, 0
-      );
-
-      var fontSize = rows * 0.75;
-      offCtx.font = 'bold ' + fontSize + 'px SUIT, sans-serif';
-      offCtx.textAlign    = 'center';
-      offCtx.textBaseline = 'middle';
-      offCtx.fillStyle    = '#000000';
-      offCtx.fillText(TEXT, 0, 0);
-      offCtx.restore();
-
-      var imgData = offCtx.getImageData(0, 0, cols, rows).data;
-      var str = '';
-      for (var r = 0; r < rows; r++) {
-        for (var c = 0; c < cols; c++) {
-          var i    = (c + r * cols) * 4;
-          var gray = (imgData[i] * 0.3 + imgData[i+1] * 0.6 + imgData[i+2] * 0.1) / 255;
-          var idx  = Math.floor(gray * (CHARSET.length - 1));
-          str += CHARSET[CHARSET.length - 1 - idx];
-        }
-        str += '\n';
-      }
-      pre.textContent = str;
+      letterSpans.forEach(function(span) {
+        if (!span) return;
+        var rect   = span.getBoundingClientRect();
+        var cx     = rect.left + rect.width  / 2;
+        var cy     = rect.top  + rect.height / 2;
+        var dist   = Math.sqrt((mouseX - cx) * (mouseX - cx) + (mouseY - cy) * (mouseY - cy));
+        var t      = falloff(dist);
+        var weight = Math.round(lerp(FROM_WEIGHT, TO_WEIGHT, t));
+        span.style.fontVariationSettings = "'wght' " + weight;
+      });
     }
 
     requestAnimationFrame(frame);
