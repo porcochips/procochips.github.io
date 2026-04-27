@@ -43,11 +43,11 @@ giscus:
   category_id: DIC_kwDOSM5tzc4C7uN6
 
 google_analytics:
-  ua: SAMPLE-VALUE
-  encrypted_ua: THIS-IS-SAMPLE-VALUE
+  ua:
+  encrypted_ua:
 
 google_adsense:
-  client: SAMPLE-VALUE
+  client:
 
 blame: "https://github.com/porcochips/porcochips.github.io/blame/master/_wiki"
 edit: "https://github.com/porcochips/porcochips.github.io/edit/master/_wiki"
